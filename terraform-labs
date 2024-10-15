@@ -644,101 +644,9 @@ curl <dns_name>
 terraform destroy -auto-approve
 
 
-###################################
-Lab-8 : Creating a MySQL Database with RDS 
-###################################
-
-cd /home/ubuntu
-
-wget https://s3.ap-south-1.amazonaws.com/files.cloudthat.training/devops/terraform-essentials/lab_12_rds.tar.gz
-tar -zxvf lab_12_rds.tar.gz
-cd lab_12_rds
-
-ls
-cat rds.tf
-cat output.tf
-
-# change the tags to include your name. change the key pair name to include your name
-
-ssh-keygen -f mykey
-ls
-
-terraform init
-terraform plan
-terraform apply -auto-approve
-
-ssh -i mykey -l ubuntu <PUBLIC IP>
-
-
-sudo apt-get update
-sudo apt-get install mysql-client
-
-mysql -u admin -h <endpoint> -p
-(get endpoint from aws console. do not include port number while entering the endpoint)
-mysql -u admin -h mysql.cfkfveiseeie.us-east-2.rds.amazonaws.com -p
-use 'password' as password.
-
-show databases;
-exit
-
-# create a new database
-create database demoDB;
-show databases;
-
-use demoDB
-
-# Use 'status' comamnd to list the DB in which you are in.
-status
-
-# create table
-create table customers(
-   ID   INT              NOT NULL,
-   NAME VARCHAR (20)     NOT NULL,
-   AGE  INT              NOT NULL,
-   ADDRESS  CHAR (25) ,
-   SALARY   DECIMAL (18, 2),       
-   PRIMARY KEY (ID)
-);
-
-# use desc comamnd to check if table is created
-desc customers;
-
-Include some values in the DB:
-
-INSERT INTO customers (ID,NAME,AGE,ADDRESS,SALARY)
-VALUES (1, 'Richard', 32, 'London', 50000.00 );
-
-INSERT INTO customers (ID,NAME,AGE,ADDRESS,SALARY)
-VALUES (2, 'Rachel', 25, 'Paris', 45000.00 );
-
-INSERT INTO customers (ID,NAME,AGE,ADDRESS,SALARY)
-VALUES (3, 'Mathew', 23, 'Brussels',55000.00 );
-
-INSERT INTO customers (ID,NAME,AGE,ADDRESS,SALARY)
-VALUES (4, 'John', 25, 'Texas', 65000.00 );
-
-INSERT INTO customers (ID,NAME,AGE,ADDRESS,SALARY)
-VALUES (5, 'Jane', 27, 'NewYork', 60000.00 );
-
-INSERT INTO customers (ID,NAME,AGE,ADDRESS,SALARY)
-VALUES (6, 'Komal', 22, 'Bangalore', 45000.00 );
-
-# Display the table:
-SELECT * FROM customers;
-select NAME, AGE from customers;
-
-# To delete the table:
-drop table customers;
-
-# exit from mysql client
-exit
-
-# exit from the mysql anchor ec2
-
-terraform destroy
 
 ####################
-Lab-9: IAM
+Lab-8: IAM
 #####################
 mkdir iam && cd iam
 vi iam.tf
@@ -797,7 +705,7 @@ terraform apply
 
 
 ###################################
-Lab 10 : Creating AWS resources using terraform modules
+Lab 9 : Creating AWS resources using terraform modules
 ###################################
 
 cd /home/ubuntu/
